@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { FC } from 'react';
+import { Home } from "../src/components/Home/Home";
+import { Explore } from "../src/components/Home/Explore";
+import { Quiz } from "../src/components/Quiz/Quiz";
+import { Routes, Route } from "react-router-dom";
 import './App.css';
+import { UserActivity } from './components/Activity/UserActivity';
+import { Scoreboard } from './components/Activity/Scoreboard';
+import { Leaderboard } from "./components/Activity/Leaderboard";
+import PrivateRoute from "./components/Account/PrivateRoute";
+import Login from "./components/Account/Login";
+import SignUp from "./components/Account/SignUp";
+import Account from "./components/Account/Account";
+import NotFound from "./components/Account/404";
 
-function App() {
+const App: FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Routes>
+        <Route path="/" element={<Home/>} /> 
+        <PrivateRoute path="/explore" element={<Explore/>} /> 
+        <Route path="/leaderboard" element={<Leaderboard/>} /> 
+        <PrivateRoute path="/quiz/:quizId" element={<Quiz/>} />
+        <PrivateRoute path="/activity" element={<UserActivity />} />
+        <PrivateRoute path="/quiz/:quizId/scoreboard" element={<Scoreboard />} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<SignUp/>} />
+        <PrivateRoute path="/account" element={<Account/>} />
+        <Route path="*" element={<NotFound />} />
+     </Routes>
     </div>
   );
 }
