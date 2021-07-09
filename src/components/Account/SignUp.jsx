@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { useAuth } from "../../context/auth-context";
-import { Theme, Grid, Paper, Avatar, Typography, TextField, Button, FormLabel } from '@material-ui/core';
+import { Grid, Paper, Avatar, Typography, TextField, Button, FormLabel } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import SignupImg from "../../assets/signup.png";
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
       },
     image: {
        backgroundImage: `url(${SignupImg})`,
        backgroundRepeat: 'no-repeat',
-       backgroundSize: 'cover',
-    backgroundPosition: 'center',
+       backgroundSize: 'auto',
+      backgroundPosition: 'center',
     }, 
     paper: {
         margin: theme.spacing(8, 4),
@@ -46,7 +46,8 @@ export default function SignUp(){
         password: ""
     })
 
-    const handleCreate = () => {
+    const handleCreate = (event) => {
+        event.preventDefault();
         const regexExp = /^\S+@\S+$/;
         if(accountDetails.firstName === "" || accountDetails.lastName === "" || accountDetails.email === "" || accountDetails.password === "" ){
             setRegisterError("Please enter all the details");
@@ -57,7 +58,6 @@ export default function SignUp(){
             setRegisterError("Incorrect email");
             return;
         }
-        
         registerUser(accountDetails.firstName, accountDetails.lastName, accountDetails.email, accountDetails.password);
     }
     const handleChange = (event) => {
@@ -105,10 +105,10 @@ export default function SignUp(){
         <Typography component="h1" variant="h5">Sign Up</Typography>
         <form className={classes.form} noValidate>
         <FormLabel error>{registerError}</FormLabel>
-        <TextField onChange={handleChange} variant="outlined" margin="normal" required fullWidth id="firstName" label="First Name" name="firstName" autoComplete="firstName" autoFocus />
-        <TextField onChange={handleChange} variant="outlined" margin="normal" required fullWidth id="lastName" label="Last Name" name="lastName" autoComplete="lastName" autoFocus />
-        <TextField onChange={handleChange} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-        <TextField onChange={handleChange} variant="outlined" margin="normal" required fullWidth id="password" label="Password" name="password" autoComplete="current-password" autoFocus />
+        <TextField onChange={handleChange} variant="outlined" margin="normal" required fullWidth id="firstName" label="First Name" name="firstName" autoComplete="firstName" />
+        <TextField onChange={handleChange} variant="outlined" margin="normal" required fullWidth id="lastName" label="Last Name" name="lastName" autoComplete="lastName" />
+        <TextField onChange={handleChange} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" />
+        <TextField onChange={handleChange} type="password" variant="outlined" margin="normal" required fullWidth id="password" label="Password" name="password" autoComplete="current-password" />
         <Button type="submit" onClick={handleCreate} fullWidth variant="contained"  color="primary" className={classes.submit}>Create Account</Button>
         <Grid container justify="flex-end">
             <Grid item >

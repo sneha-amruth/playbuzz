@@ -3,21 +3,20 @@ import { useState } from "react";
 import { useLoader } from "../../context/loader-context";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Theme, Grid, Paper, Avatar, Typography, TextField, Button, FormLabel, CircularProgress } from '@material-ui/core';
+import { Grid, Paper, Avatar, Typography, TextField, Button, FormLabel, CircularProgress } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
 import LockOpenOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 import LoginImg from "../../assets/login.png";
 
-
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
       },
     image: {
        backgroundImage: `url(${LoginImg})`,
        backgroundRepeat: 'no-repeat',
-       backgroundSize: 'cover',
-    backgroundPosition: 'center',
+       backgroundSize: 'auto',
+       backgroundPosition: 'center',
     }, 
     paper: {
         margin: theme.spacing(8, 4),
@@ -52,7 +51,8 @@ export default function Login() {
     if(isUserLoggedIn){
         navigate(state?.from? state.from : "/");
     }
-     function loginHandler() {  
+     function loginHandler(event) {  
+        event.preventDefault();
         loginUserWithCredentials(credentials.email, credentials.password);
     }
     function handleChange(event){
@@ -71,7 +71,6 @@ export default function Login() {
                     }
             });
         }
-       
     
     return (
         <> {isLoading && <CircularProgress style={{marginTop: "20rem"}}/>}
@@ -85,7 +84,7 @@ export default function Login() {
                     <form className={classes.form} noValidate>
                     <FormLabel error>{loginError}</FormLabel>
                     <TextField onChange={handleChange} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-                    <TextField onChange={handleChange} variant="outlined" margin="normal" required fullWidth id="password" label="Password" name="password" autoComplete="current-password" autoFocus />
+                    <TextField onChange={handleChange} variant="outlined" margin="normal" type="password" required fullWidth id="password" label="Password" name="password" autoComplete="current-password" autoFocus />
                     <Button type="submit" onClick={loginHandler} fullWidth variant="contained"  color="primary" className={classes.submit}>{isUserLoggedIn ? "logout" : "LOG IN"}</Button>
                     <Grid container justify="flex-end">
                         <Grid item >

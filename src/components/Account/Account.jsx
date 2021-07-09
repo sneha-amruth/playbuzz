@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { UserActivity } from "../Activity/UserActivity";
+import { useAuth } from "../../context/auth-context";
 import { Header } from "../Home/Header";
-import { CircularProgress, Typography, Grid, Card, CardContent, Container } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 
 export default function Account(){
     const [userName, setUserName] = useState("");
+    const { isUserLoggedIn } = useAuth();
 
     useEffect(() => {
         setUserName(JSON.parse(localStorage?.getItem("user")).name);
-    }, [])
+    }, [isUserLoggedIn])
     
     return (
         <>

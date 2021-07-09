@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import LandingPageImg from "../../assets/landingpage.png";
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
       },
@@ -22,9 +22,15 @@ const useStyles = makeStyles(() => ({
     image: {
         backgroundImage: `url(${LandingPageImg})`,
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
+        backgroundSize: 'auto',
        backgroundPosition: 'center',
      }, 
+     heroText: {
+        [theme.breakpoints.up('md')]: {
+            marginTop: "14rem"
+          },
+       
+     }
   }));
 
 export const Home: React.FC = () => {
@@ -35,12 +41,12 @@ export const Home: React.FC = () => {
         <>
         <Header />
         <Grid container component="main" direction="row" className={classes.root} >
-            <Grid item xs={false} sm={4} md={7} className={classes.image} />
-            <Grid item justify="flex-start">
-                <Typography variant="h4" color="textPrimary" gutterBottom>welcome to playbuzz</Typography>
+            <Grid item xs={false} sm={false} md={7} className={classes.image} />
+            <Grid item className={classes.heroText }>
+              <Typography variant="h4" color="textPrimary" gutterBottom>welcome to playbuzz</Typography>
                 <Typography variant="h5" color="textSecondary" paragraph>If you're a skincare nerd, take this fun Skincare Quiz </Typography>
                 {isUserLoggedIn && 
-                    <Button component={Link} to="/explore" variant="contained" size="large" color="primary">Explore</Button>}
+                   <Button component={Link} to="/explore" variant="contained" size="large" color="primary">Explore</Button>}
                 {!isUserLoggedIn && 
                 <div>
                     <Button component={Link} to="/login" variant="contained" size="large" color="primary" className={classes.btnPrimary}>Login</Button>

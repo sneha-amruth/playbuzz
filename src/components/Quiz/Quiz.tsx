@@ -39,6 +39,7 @@ export const Quiz: React.FC = () => {
         if(nextQues === noOfQues) {
             setButtonText("Submit")
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[nextQues, []]);
 
     const handleNextQues = () => {
@@ -48,7 +49,7 @@ export const Quiz: React.FC = () => {
         }
         else if(nextQues === noOfQues) {
             const activity = quizState?.scoreDetails.filter(item => item.category === currentQuiz?.category)[0];
-            submitScore({category: activity.category, score: activity.score, attempts: activity.attempts})
+            submitScore({category: activity.category, score: activity.score, attempts: activity.attempts});
             navigate(`/quiz/${currentQuiz._id}/scoreboard`);
         }
     }

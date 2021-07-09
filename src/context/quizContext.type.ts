@@ -9,8 +9,8 @@ export type Leaderboard = {
 export type ScoreDetails = {
     category: Category,
     score: number,
-    rightAns?: number,
-    wrongAns?: number,
+    rightAns: number,
+    wrongAns: number,
     attempts: number,
 }
 
@@ -57,8 +57,7 @@ export type QuizContextType = {
     quizState: State,
     quizDispatch: React.Dispatch<any>,
     incOrDecScore: (props: incOrDecScoreProps) => void,
-    submitScore: ({ category, score, attempts }: ScoreDetails) => void,
-    getLeaderboard: () => void
+    submitScore: ({ category, score, attempts }: {category: Category, score: number, attempts: number}) => void,
 }
 
 export type Action = 

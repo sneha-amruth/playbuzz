@@ -17,9 +17,8 @@ export const UserActivity: React.FC = () => {
     const { quizState, quizDispatch } = useQuiz();
     const { request } = restAPICalls();
     const { isLoading, setLoading } = useLoader();
-
+   
      useEffect(() => {
-         
        (async () => {
         try {
             setLoading(true); 
@@ -39,6 +38,7 @@ export const UserActivity: React.FC = () => {
             setLoading(false);
         }
        })();
+       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

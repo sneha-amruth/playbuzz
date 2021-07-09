@@ -4,6 +4,7 @@ import { useLoader } from "../../context/loader-context";
 import { Header } from "../Home/Header";
 import { CircularProgress, Typography, Grid, Card, CardContent, Container } from "@material-ui/core";
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import { restAPICalls } from "../../utils/CallRestAPI";
 
 const useStyles = makeStyles((theme: Theme) => ({
     heroContent: {
@@ -14,12 +15,33 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const Leaderboard: React.FC  = () => {
     const classes = useStyles();
-    const { quizState, getLeaderboard } = useQuiz();
-    const { isLoading } = useLoader();
+    const { request } = restAPICalls();
+    const { quizState,quizDispatch } = useQuiz();
+    const { isLoading,setLoading } = useLoader();
 
     useEffect(() => {
-        getLeaderboard();
-    }, [])
+        (async () => {
+            try {
+               setLoading(true);
+                const {data, success} = await request({
+                    method:  "GET",
+                    endpoint: `/api/leaderboard`,
+                });
+                if(success) {
+                   quizDispatch({
+                       type: 'SET_LEADERBOARD',
+                       payload: data
+                   });
+                   setLoading(false);
+                }
+            } catch(err) {
+                console.error(err);
+                setLoading(false);
+            }
+           })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <>
         <Header />

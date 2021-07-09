@@ -1,9 +1,10 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
-import { QuizContextType, State, ScoreDetails, incOrDecScoreProps } from "./quizContext.type";
+import { QuizContextType, State, Category, incOrDecScoreProps } from "./quizContext.type";
 import { quizReducer } from "./quizReducer";
 import React from "react";
 import { restAPICalls } from "../utils/CallRestAPI";
 import { useLoader } from "./loader-context";
+import { useAuth } from "./auth-context";
 
 const QuizContext = createContext<QuizContextType>({} as QuizContextType);
 
@@ -16,6 +17,7 @@ const defaultState: State = {
 export const QuizProvider: React.FC = ({children}) => {
     const { request } = restAPICalls();
     const { setLoading } = useLoader();
+    const { isUserLoggedIn } = useAuth();
     const [ quizState , quizDispatch] = useReducer(quizReducer, defaultState);
 
     useEffect(() => {
@@ -38,7 +40,27 @@ export const QuizProvider: React.FC = ({children}) => {
             setLoading(false);
         }
        })();
-    }, [])
+       (async () => {
+        try {
+            setLoading(true); 
+            const {data, success} = await request({
+                method:  "GET",
+                endpoint: `/api/scoreboard`,
+            });
+            if(success) {
+                quizDispatch({
+                    type: 'SET_USER_SCOREBOARD',
+                    payload: data
+                })
+                setLoading(false);
+            }
+        } catch(err) {
+            console.error(err);
+            setLoading(false);
+        }
+       })();
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isUserLoggedIn])
 
     const incOrDecScore = ({type, category, score}: incOrDecScoreProps) => {
         (async () => {
@@ -66,7 +88,7 @@ export const QuizProvider: React.FC = ({children}) => {
            })();
     }
 
-    const submitScore = ({category, score, attempts}: ScoreDetails) => {
+    const submitScore = ({category, score, attempts}: {category: Category, score: number, attempts: number}) => {
         (async () => {
             try {
                 setLoading(true);
@@ -87,30 +109,9 @@ export const QuizProvider: React.FC = ({children}) => {
             }
            })();
     }
-    const getLeaderboard = () => {
-            (async () => {
-             try {
-                setLoading(true);
-                 const {data, success} = await request({
-                     method:  "GET",
-                     endpoint: `/api/leaderboard`,
-                 });
-                 if(success) {
-                    quizDispatch({
-                        type: 'SET_LEADERBOARD',
-                        payload: data
-                    });
-                    setLoading(false);
-                 }
-             } catch(err) {
-                 console.error(err);
-                 setLoading(false);
-             }
-            })();
-         }
 
     return (
-        <QuizContext.Provider value={{quizState , quizDispatch, incOrDecScore, submitScore, getLeaderboard}}>
+        <QuizContext.Provider value={{quizState , quizDispatch, incOrDecScore, submitScore }}>
             {children}
         </QuizContext.Provider>
     )

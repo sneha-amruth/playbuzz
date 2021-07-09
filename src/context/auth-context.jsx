@@ -14,8 +14,8 @@ export function AuthProvider({children}) {
     const [isUserLoggedIn, setLogin] = useState(false);
     const [userId, setUserId] = useState(null);
     const [token, setToken] = useState(null);
-    const [loginError,  setLoginError] = useState(null);
-    const [registerError,  setRegisterError] = useState(null);
+    const [loginError, setLoginError] = useState(null);
+    const [registerError, setRegisterError] = useState(null);
 
     useEffect(() => {
         const userLoginStatus = JSON.parse(localStorage?.getItem("user"));
@@ -76,7 +76,8 @@ export function AuthProvider({children}) {
                 setLoading(false);
                 setLogin(true);
                 navigate(state?.from? state.from : "/");
-            } else {
+            } 
+            else {
                 setLoading(false);
                 setLogin(false);
                 setUserId(null);

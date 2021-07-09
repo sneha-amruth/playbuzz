@@ -35,7 +35,6 @@ export const Scoreboard: React.FC  = () => {
             type: "INITIATE_QUIZ",
             payload: category
         })
-       
     }
    
     return (
