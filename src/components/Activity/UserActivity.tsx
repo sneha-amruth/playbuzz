@@ -53,8 +53,8 @@ export const UserActivity: React.FC = () => {
             <h1>You've not taken any quiz yet!</h1> :
             <Grid container spacing={2} justify="center">
             <Grid item xs={12}>
-                {(quizState?.scoreDetails?.map(item => 
-                    (<>
+                {(quizState?.scoreDetails?.map((item, index) => 
+                    (<div key={index}>
                     <Card>
                         <CardContent>
                         <Grid container>
@@ -77,7 +77,7 @@ export const UserActivity: React.FC = () => {
                             </Grid>
                         </CardContent>
                     </Card> 
-                    </>))
+                    </div>))
                 )}
                   </Grid>
                 </Grid>

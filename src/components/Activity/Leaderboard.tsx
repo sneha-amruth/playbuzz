@@ -52,7 +52,7 @@ export const Leaderboard: React.FC  = () => {
            <Container maxWidth="sm">
            <Typography component="h1" variant="h4" align="center" color="textPrimary" gutterBottom> Leaderboard </Typography>
            {quizState.leaderboard.map((item,index) => (
-               <>
+               <div key={item._id}>
                <Grid container spacing={2} justify="center">
                 <Grid item xs={12}>
                     <Card>
@@ -83,7 +83,7 @@ export const Leaderboard: React.FC  = () => {
                     </Card> 
                 </Grid>
                 </Grid>
-            </>
+            </div>
           ))}
           </Container>
           </div>}

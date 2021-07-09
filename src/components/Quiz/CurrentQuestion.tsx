@@ -55,8 +55,8 @@ export const CurrentQuestion: React.FC<Props> = (props) => {
         <Grid item key={questionObj?._id}>
              <Grid item> <Typography variant="h5">{questionObj?.question}</Typography> </Grid>
                     {questionObj?.options.map(optionObj => (
-                      <>
-                        <Grid item sm={12} key={optionObj._id}>
+                      <div key={optionObj._id}>
+                        <Grid item sm={12}>
                             <Button 
                               className={classes.btnStyle} 
                                variant="outlined" onClick={() => handleSelectedAns(optionObj)} disabled={!optionBtns}> 
@@ -65,7 +65,7 @@ export const CurrentQuestion: React.FC<Props> = (props) => {
                                 {selectedAnswer !== rightAnswer && selectedAnswer === optionObj && <CloseIcon color="primary"/>}
                             </Button>
                         </Grid>
-                        </>
+                        </div>
                         ))}
                </Grid>
         </>

@@ -33,8 +33,8 @@ export const Explore: React.FC = () => {
           <Header />
           <Grid container direction="row">
           {quizState?.quizes?.map(quiz => (
-          <Grid item sm={12} md={12} lg={4}>
-           <Card className={classes.root} key={quiz._id}>
+          <Grid item sm={12} md={12} lg={4} key={quiz._id}>
+           <Card className={classes.root}>
               <CardActionArea>
                   <CardMedia className={classes.media} image={quiz.image} title="Quiz Category"/>
                   <CardContent>
