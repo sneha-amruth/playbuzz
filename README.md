@@ -1,1 +1,1 @@
-Playbuzz is a quiz app build in Typescript and material-ui
+Playbuzz is a quiz app built in Typescript and material-ui
