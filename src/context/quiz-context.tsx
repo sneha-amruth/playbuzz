@@ -17,10 +17,11 @@ const defaultState: State = {
 export const QuizProvider: React.FC = ({children}) => {
     const { request } = restAPICalls();
     const { setLoading } = useLoader();
-    const { isUserLoggedIn } = useAuth();
+    const { isUserLoggedIn, token } = useAuth();
     const [ quizState , quizDispatch] = useReducer(quizReducer, defaultState);
 
     useEffect(() => {
+        if(isUserLoggedIn){
        (async () => {
         setLoading(true); 
         try {
@@ -59,8 +60,9 @@ export const QuizProvider: React.FC = ({children}) => {
             setLoading(false);
         }
        })();
+    }
        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isUserLoggedIn])
+    }, [token])
 
     const incOrDecScore = ({type, category, score}: incOrDecScoreProps) => {
         (async () => {

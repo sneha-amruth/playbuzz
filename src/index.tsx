@@ -16,7 +16,7 @@ ReactDOM.render(
       <QuizProvider>
         <App />
         </QuizProvider>
-      </AuthProvider>
+        </AuthProvider>
       </LoaderContextProvider>
     </Router>
   </React.StrictMode>,

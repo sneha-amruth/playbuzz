@@ -4,7 +4,6 @@ import { Explore } from "../src/components/Home/Explore";
 import { Quiz } from "../src/components/Quiz/Quiz";
 import { Routes, Route } from "react-router-dom";
 import './App.css';
-import { UserActivity } from './components/Activity/UserActivity';
 import { Scoreboard } from './components/Activity/Scoreboard';
 import { Leaderboard } from "./components/Activity/Leaderboard";
 import PrivateRoute from "./components/Account/PrivateRoute";
@@ -21,7 +20,6 @@ const App: FC = () => {
         <PrivateRoute path="/explore" element={<Explore/>} /> 
         <Route path="/leaderboard" element={<Leaderboard/>} /> 
         <PrivateRoute path="/quiz/:quizId" element={<Quiz/>} />
-        <PrivateRoute path="/activity" element={<UserActivity />} />
         <PrivateRoute path="/quiz/:quizId/scoreboard" element={<Scoreboard />} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<SignUp/>} />
