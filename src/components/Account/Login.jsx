@@ -41,6 +41,9 @@ export default function Login() {
                     }
             });
         }
+    function handleGuestCredentials() {
+        loginUserWithCredentials("testuser@gmail.com", "testuser@12");
+    }
     
     return (
         <> {isLoading && <CircularProgress style={{marginTop: "20rem"}}/>}
@@ -56,6 +59,7 @@ export default function Login() {
                     <TextField onChange={handleChange} variant="outlined" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
                     <TextField onChange={handleChange} variant="outlined" margin="normal" type="password" required fullWidth id="password" label="Password" name="password" autoComplete="current-password" autoFocus />
                     <Button type="submit" onClick={loginHandler} fullWidth variant="contained"  color="primary" className={classes.submit}>{isUserLoggedIn ? "logout" : "LOG IN"}</Button>
+                    <Button type="button" onClick={handleGuestCredentials} className="btn btn-primary btn-large">Use Guest Credentials</Button>
                     <Grid container justify="flex-end">
                         <Grid item >
                         <Link to="/register" variant="body2"> {"Don't have an account? Sign Up"} </Link>

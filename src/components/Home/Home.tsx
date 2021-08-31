@@ -53,7 +53,7 @@ export const Home: React.FC = () => {
                     <Button component={Link} to="/register" variant="outlined" size="large" color="primary">Sign Up</Button>
                 </div> }
         </Grid>
-       </Grid>
+       </Grid> 
     </>
     )
 }
