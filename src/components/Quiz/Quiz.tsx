@@ -29,7 +29,7 @@ export const Quiz: React.FC = () => {
     const navigate = useNavigate();
 
     const currentQuiz = quizState?.quizes?.filter(quiz => quiz._id === quizId)[0];
-    const currentScore = quizState?.scoreDetails.filter(item =>  item.category === currentQuiz.category)[0]?.score;
+    const currentScore = quizState?.scoreDetails.filter(item =>  item.category === currentQuiz?.category)[0]?.score;
     const noOfQues = currentQuiz?.questionsList.length - 1;
    
     const [questionObj, setQuestionObj] = useState<QuestionsList>(currentQuiz?.questionsList[0]);
@@ -40,7 +40,7 @@ export const Quiz: React.FC = () => {
             setButtonText("Submit")
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[nextQues, []]);
+    },[nextQues]);
 
     const handleNextQues = () => {
         if(nextQues < noOfQues) {

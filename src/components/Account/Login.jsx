@@ -1,5 +1,5 @@
 import { useAuth } from "../../context/auth-context";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLoader } from "../../context/loader-context";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -18,10 +18,14 @@ export default function Login() {
     const {state} = useLocation();
     const navigate = useNavigate();
 
-    if(isUserLoggedIn){
-        navigate(state?.from? state.from : "/");
-    }
-     function loginHandler(event) {  
+    useEffect(() => {
+        if(isUserLoggedIn){
+            navigate(state?.from? state.from : "/");
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isUserLoggedIn]);
+
+     function loginHandler(event) {
         event.preventDefault();
         loginUserWithCredentials(credentials.email, credentials.password);
     }

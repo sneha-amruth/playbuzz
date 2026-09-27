@@ -16,14 +16,14 @@ const App: FC = () => {
   return (
     <div className="App">
      <Routes>
-        <Route path="/" element={<Home/>} /> 
-        <PrivateRoute path="/explore" element={<Explore/>} /> 
-        <Route path="/leaderboard" element={<Leaderboard/>} /> 
-        <PrivateRoute path="/quiz/:quizId" element={<Quiz/>} />
-        <PrivateRoute path="/quiz/:quizId/scoreboard" element={<Scoreboard />} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/explore" element={<PrivateRoute><Explore/></PrivateRoute>} />
+        <Route path="/leaderboard" element={<Leaderboard/>} />
+        <Route path="/quiz/:quizId" element={<PrivateRoute><Quiz/></PrivateRoute>} />
+        <Route path="/quiz/:quizId/scoreboard" element={<PrivateRoute><Scoreboard /></PrivateRoute>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<SignUp/>} />
-        <PrivateRoute path="/account" element={<Account/>} />
+        <Route path="/account" element={<PrivateRoute><Account/></PrivateRoute>} />
         <Route path="*" element={<NotFound />} />
      </Routes>
     </div>

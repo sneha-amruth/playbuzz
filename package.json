@@ -15,7 +15,6 @@
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.7",
     "axios": "^0.21.1",
-    "dotenv": "^10.0.0",
     "history": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -47,5 +46,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/minimatch": "^3.0.5"
+  },
+  "overrides": {
+    "@babel/core": "^7.16.0"
   }
 }
