@@ -16,7 +16,7 @@ export default function Account(){
     const { isUserLoggedIn } = useAuth();
 
     useEffect(() => {
-        setUserName(JSON.parse(localStorage?.getItem("user")).name);
+        setUserName(JSON.parse(localStorage?.getItem("user"))?.name ?? "");
         if(isUserLoggedIn){
             (async () => {
              try {

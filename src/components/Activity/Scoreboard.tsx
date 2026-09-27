@@ -30,7 +30,7 @@ export const Scoreboard: React.FC  = () => {
     const rightAns = scoreboard?.rightAns;
     const wrongAns = scoreboard?.wrongAns
 
-    const handleClick = (id: string, category: Category) => {
+    const handleClick = (id: string | undefined, category: Category) => {
         quizDispatch({
             type: "INITIATE_QUIZ",
             payload: category
