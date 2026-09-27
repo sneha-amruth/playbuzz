@@ -49,5 +49,8 @@
   },
   "devDependencies": {
     "@types/minimatch": "^3.0.5"
+  },
+  "overrides": {
+    "@babel/core": "^7.16.0"
   }
 }
